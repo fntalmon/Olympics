@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { RefreshProvider } from "./RefreshContext";
+import "./App.css";
+import Container from "./components/Container";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom"; // Cambia Router a BrowserRouter
+import Inicio from "./Inicio";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <RefreshProvider>
+      <Router>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column", // Asegúrate de que el contenedor maneje el contenido verticalmente
+            minHeight: "100vh", // Usa minHeight en lugar de height para permitir el scroll
+            backgroundColor: "#070F2B",
+            overflowX: "hidden", // Evita el scroll horizontal
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Routes>
+            <Route path="/" element={<Inicio />} />
+            <Route path="/trivia/:id" element={<Container />} />
+          </Routes>
+        </div>
+      </Router>
+    </RefreshProvider>
   );
 }
 
